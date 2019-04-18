@@ -1,0 +1,14 @@
+{
+  "name": "connectingfours",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node src/runner.js"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  },
+  "devDependencies": {
+    "jest": "^24.7.1"
+  }
+}
