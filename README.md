@@ -13,6 +13,12 @@ Yeah man, connect 4
     npm start
 ```
 
+For tests:
+
+```bash
+    npm test
+```
+
 ## Information
 
 * We have set the project up so you can focus on the requirements, no need to worry about rendering anything to the screen.  Anything in runner.js is not part the test, though if you finish the test, feel free to refactor it.

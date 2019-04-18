@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node src/runner.js"
+    "start": "node src/runner.js",
+    "test": "jest"
   },
   "dependencies": {
     "readline-sync": "^1.4.9"
