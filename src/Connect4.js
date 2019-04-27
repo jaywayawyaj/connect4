@@ -44,12 +44,16 @@ class ConnectFour {
     _hasWonVertically(player) {
         for(let a = 0; a < 5; a++) {
             for(let i = 5; i >= 0; i--) {
-                this._placeTokens(i, a, player)
+                this._countTokens(i, a, player)
             }
         }
     }
 
-    _placeTokens(a, i, player) {
+    _hasWonDiagonallyAscending(player) {
+
+    }
+
+    _countTokens(a, i, player) {
         this.board[a][i] === this.tokens[player] ?
             this.counter += 1 : this.counter = 0
         this._winConditions(player)
