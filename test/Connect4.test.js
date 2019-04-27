@@ -326,6 +326,23 @@ describe('Connect4', () => {
                 expect(connect4.inProgress).toEqual(false)
                 expect(connect4.winner).toEqual(1)
             })
+
+            test('win descending diagonally low right', () => {
+                const connect4 = new Connect4()
+
+                connect4.board = ([
+                    [' ', ' ', ' ', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' '],
+                    [' ', ' ', 'x', ' ', ' ', ' '],
+                    [' ', ' ', ' ', 'x', ' ', ' '],
+                    [' ', ' ', ' ', ' ', 'x', ' '],
+                    [' ', ' ', ' ', ' ', ' ', 'x']
+                ])
+                connect4._hasWon(1)
+
+                expect(connect4.inProgress).toEqual(false)
+                expect(connect4.winner).toEqual(1)
+            })
         })
     })
 })
