@@ -238,7 +238,7 @@ describe('Connect4', () => {
         ]);
 
       expect(connect4.inProgress).toEqual(false);
-
-      expect(connect4.winner).toEqual(2)
+      
+      expect(connect4.winner).toEqual(1)
   });
 });

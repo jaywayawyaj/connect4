@@ -31,30 +31,37 @@ class ConnectFour {
     _hasWon(player) {
       this._hasWonHorizontally(player)
       this._hasWonVertically(player)
+      this._hasWonDiagonallyAscending(player)
     }
 
     _hasWonHorizontally(player) {
-        for(let a = 5; a >= 0; a--) {
-            for(let i = 0; i < 5; i++) {
-                this._placeTokens(a, i, player)
+        for(let r = 5; r >= 0; r--) {
+            for(let c = 0; c <= 5; c++) {
+                this._countTokens(r, c, player)
             }
         }
     }
 
     _hasWonVertically(player) {
-        for(let a = 0; a < 5; a++) {
-            for(let i = 5; i >= 0; i--) {
-                this._countTokens(i, a, player)
+        for(let c = 0; c <= 5; c++) {
+            for(let r = 5; r >= 0; r--) {
+                this._countTokens(r, c, player)
             }
         }
     }
 
     _hasWonDiagonallyAscending(player) {
-
+        for(let r = 5; r >= 0; r--) {
+            let e = r
+            for(let c = 0; c <= 5; c++) {
+                this._countTokens(c, e, player)
+                e -= 1
+            }
+        }
     }
 
-    _countTokens(a, i, player) {
-        this.board[a][i] === this.tokens[player] ?
+    _countTokens(c, r, player) {
+        this.board[c][r] === this.tokens[player] ?
             this.counter += 1 : this.counter = 0
         this._winConditions(player)
     }
@@ -66,6 +73,5 @@ class ConnectFour {
         }
     }
 }
-
 
 module.exports = ConnectFour
