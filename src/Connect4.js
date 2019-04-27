@@ -52,7 +52,6 @@ class ConnectFour {
     }
 
     _hasWonDiagonallyAscending(player) {
-
         for(let e = 5; e >= 0; e--) {
             let r = e
             for(let c = 0; c <= 5; c++) {
@@ -71,8 +70,7 @@ class ConnectFour {
     }
 
     _hasWonDiagonallyDescending(player) {
-
-        for(e = 0; e <= 5; e++) {
+        for(let e = 0; e <= 5; e++) {
             let r = e
             for(let c = 0; c <= 5; c++) {
                 this._countTokens(r, c, player)
