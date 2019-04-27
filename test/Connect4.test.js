@@ -215,20 +215,8 @@ describe('Connect4', () => {
   });
   test('either player can win ascending diagonally', () => {
       const connect4 = new Connect4();
-      connect4.selectColumn(1, 1);
-      connect4.selectColumn(2, 2);
-      connect4.selectColumn(2, 1);
-      connect4.selectColumn(3, 2);
-      connect4.selectColumn(3, 2);
-      connect4.selectColumn(3, 1);
-      connect4.selectColumn(4, 2);
-      connect4.selectColumn(4, 2);
-      connect4.selectColumn(4, 2);
-      connect4.selectColumn(4, 1);
-      connect4._hasWon(1);
 
-
-      expect(connect4.board).toEqual([
+      connect4.board = ([
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', 'x', ' ', ' '],
@@ -237,34 +225,17 @@ describe('Connect4', () => {
           ['x', 'o', 'o', 'o', ' ', ' ']
         ]);
 
+      connect4._hasWon(1);
+
+
       expect(connect4.inProgress).toEqual(false);
 
       expect(connect4.winner).toEqual(1)
   });
   test('either player can win ascending diagonally at top right', () => {
       const connect4 = new Connect4();
-      connect4.selectColumn(1, 1);
-      connect4.selectColumn(1, 1);
-      connect4.selectColumn(1, 1);
-      connect4.selectColumn(2, 2);
-      connect4.selectColumn(2, 1);
-      connect4.selectColumn(2, 1);
-      connect4.selectColumn(2, 1);
-      connect4.selectColumn(3, 2);
-      connect4.selectColumn(3, 2);
-      connect4.selectColumn(3, 2);
-      connect4.selectColumn(3, 1);
-      connect4.selectColumn(3, 1);
-      connect4.selectColumn(4, 2);
-      connect4.selectColumn(4, 2);
-      connect4.selectColumn(4, 2);
-      connect4.selectColumn(4, 1);
-      connect4.selectColumn(4, 2);
-      connect4.selectColumn(4, 1);
-      connect4._hasWon(1);
 
-
-      expect(connect4.board).toEqual([
+      connect4.board = ([
           [' ', ' ', ' ', 'x', ' ', ' '],
           [' ', ' ', 'x', 'o', ' ', ' '],
           [' ', 'x', 'x', 'x', ' ', ' '],
@@ -273,34 +244,16 @@ describe('Connect4', () => {
           ['x', 'o', 'o', 'o', ' ', ' ']
         ]);
 
+      connect4._hasWon(1);
+
       expect(connect4.inProgress).toEqual(false);
 
       expect(connect4.winner).toEqual(1)
   });
   test('either player can win ascending diagonally not from board[5][0]', () => {
       const connect4 = new Connect4();
-      connect4.selectColumn(3, 1);
-      connect4.selectColumn(3, 1);
-      connect4.selectColumn(3, 1);
-      connect4.selectColumn(4, 2);
-      connect4.selectColumn(4, 1);
-      connect4.selectColumn(4, 1);
-      connect4.selectColumn(4, 1);
-      connect4.selectColumn(5, 2);
-      connect4.selectColumn(5, 2);
-      connect4.selectColumn(5, 2);
-      connect4.selectColumn(5, 1);
-      connect4.selectColumn(5, 1);
-      connect4.selectColumn(6, 2);
-      connect4.selectColumn(6, 2);
-      connect4.selectColumn(6, 2);
-      connect4.selectColumn(6, 1);
-      connect4.selectColumn(6, 2);
-      connect4.selectColumn(6, 1);
-      connect4._hasWon(1);
 
-
-      expect(connect4.board).toEqual([
+      connect4.board = ([
           [' ', ' ', ' ', ' ', ' ', 'x'],
           [' ', ' ', ' ', ' ', 'x', 'o'],
           [' ', ' ', ' ', 'x', 'x', 'x'],
@@ -309,8 +262,32 @@ describe('Connect4', () => {
           [' ', ' ', 'x', 'o', 'o', 'o']
         ]);
 
+        connect4._hasWon(1);
+
+
       expect(connect4.inProgress).toEqual(false);
 
       expect(connect4.winner).toEqual(1)
   });
+
+  xtest('either player can win ascending diagonally from mid table', () => {
+      const connect4 = new Connect4();
+
+      connect4.board = ([
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', 'x'],
+          [' ', ' ', ' ', ' ', 'x', 'x'],
+          [' ', ' ', ' ', 'x', 'o', 'o'],
+          [' ', ' ', 'x', 'x', 'o', 'o'],
+          [' ', ' ', 'x', 'o', 'o', 'o']
+        ]);
+
+      connect4._hasWon(1);
+
+
+      expect(connect4.inProgress).toEqual(false);
+
+      expect(connect4.winner).toEqual(1)
+  });
+
 });
