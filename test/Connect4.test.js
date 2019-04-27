@@ -17,7 +17,8 @@ describe('Connect4', () => {
     test('player 1 can select column 1', () => {
       const connect4 = new Connect4();
 
-      expect(connect4.selectColumn(1, 1)).toEqual([
+      connect4.selectColumn(1, 1)
+      expect(connect4.board).toEqual([
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
@@ -29,8 +30,8 @@ describe('Connect4', () => {
 
     test('player 2 can select column 2, 2', () => {
       const connect4 = new Connect4();
-
-      expect(connect4.selectColumn(2, 2)).toEqual([
+      connect4.selectColumn(2, 2)
+      expect(connect4.board).toEqual([
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
@@ -49,6 +50,8 @@ describe('Connect4', () => {
       connect4.selectColumn(2, 1)
       connect4.selectColumn(3, 1)
       connect4.selectColumn(4, 1)
+      connect4._hasWon(1)
+
 
       expect(connect4.board).toEqual([
           [' ', ' ', ' ', ' ', ' ', ' '],
@@ -61,7 +64,7 @@ describe('Connect4', () => {
 
       expect(connect4.inProgress).toEqual(false);
 
-      expect(connect4.hasWon(1)).toEqual('Player 1 has won!')
+      expect(connect4.winner).toEqual(1)
     });
 
     test('player 1 can win with 4 in a row horozintally with gaps', () => {
@@ -71,6 +74,8 @@ describe('Connect4', () => {
       connect4.selectColumn(3, 1)
       connect4.selectColumn(4, 1)
       connect4.selectColumn(5, 1)
+      connect4._hasWon(1)
+
 
       expect(connect4.board).toEqual([
           [' ', ' ', ' ', ' ', ' ', ' '],
@@ -91,6 +96,8 @@ describe('Connect4', () => {
       connect4.selectColumn(3, 2)
       connect4.selectColumn(4, 2)
       connect4.selectColumn(5, 2)
+      connect4._hasWon(2)
+
 
       expect(connect4.board).toEqual([
           [' ', ' ', ' ', ' ', ' ', ' '],
@@ -103,8 +110,31 @@ describe('Connect4', () => {
 
       expect(connect4.inProgress).toEqual(false);
 
-      expect(connect4.hasWon(2)).toEqual('Player 2 has won!')
+      expect(connect4.winner).toEqual(2)
 
+    });
+
+    test('either player can win with 4 in a row horozintally with gaps', () => {
+      const connect4 = new Connect4();
+
+      connect4.selectColumn(2, 2)
+      connect4.selectColumn(3, 1)
+      connect4.selectColumn(4, 1)
+      connect4.selectColumn(5, 2)
+      connect4.selectColumn(2, 2)
+      connect4.selectColumn(3, 2)
+      connect4.selectColumn(4, 2)
+      connect4.selectColumn(5, 2)
+      connect4._hasWon(2)      
+
+      expect(connect4.board).toEqual([
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', 'o', 'o', 'o', 'o', ' '],
+          [' ', 'o', 'x', 'x', 'o', ' ']
+      ]);
     });
 
     test('player 1 can select column 1 twice', () => {
@@ -121,4 +151,66 @@ describe('Connect4', () => {
           ['x', ' ', ' ', ' ', ' ', ' ']
       ]);
     });
+
+    test('player 2 can select column 3 thrice', () => {
+      const connect4 = new Connect4();
+      connect4.selectColumn(3, 2);
+      connect4.selectColumn(3, 2);
+      connect4.selectColumn(3, 2);
+
+      expect(connect4.board).toEqual([
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', 'o', ' ', ' ', ' '],
+          [' ', ' ', 'o', ' ', ' ', ' '],
+          [' ', ' ', 'o', ' ', ' ', ' ']
+      ]);
+    });
+
+      test('either player can win vertically', () => {
+        const connect4 = new Connect4();
+        connect4.selectColumn(3, 2);
+        connect4.selectColumn(3, 2);
+        connect4.selectColumn(3, 2);
+        connect4.selectColumn(3, 2);
+        connect4._hasWon(2);
+
+        expect(connect4.board).toEqual([
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', 'o', ' ', ' ', ' '],
+            [' ', ' ', 'o', ' ', ' ', ' '],
+            [' ', ' ', 'o', ' ', ' ', ' '],
+            [' ', ' ', 'o', ' ', ' ', ' ']
+          ]);
+
+        expect(connect4.inProgress).toEqual(false);
+
+        expect(connect4.winner).toEqual(2)
+    });
+
+    test('either player can win vertically with gaps', () => {
+      const connect4 = new Connect4();
+      connect4.selectColumn(3, 1);
+      connect4.selectColumn(3, 2);
+      connect4.selectColumn(3, 2);
+      connect4.selectColumn(3, 2);
+      connect4.selectColumn(3, 2);
+      connect4._hasWon(2);
+
+
+      expect(connect4.board).toEqual([
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', 'o', ' ', ' ', ' '],
+          [' ', ' ', 'o', ' ', ' ', ' '],
+          [' ', ' ', 'o', ' ', ' ', ' '],
+          [' ', ' ', 'o', ' ', ' ', ' '],
+          [' ', ' ', 'x', ' ', ' ', ' ']
+        ]);
+
+      expect(connect4.inProgress).toEqual(false);
+
+      expect(connect4.winner).toEqual(2)
+  });
 });

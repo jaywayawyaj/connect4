@@ -1,6 +1,7 @@
 class ConnectFour {
     constructor() {
         this.inProgress = true;
+        this.winner = null;
         this.board = [
             [' ', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' '],
@@ -9,33 +10,58 @@ class ConnectFour {
             [' ', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' ']
         ];
+
         this.tokens = {
-          1: 'x',
-          2: 'o'
+            1: 'x',
+            2: 'o'
         }
+
+        this.counter = 0
     }
 
     selectColumn(columnNumber, player) {
-        this.board[5][columnNumber - 1] = this.tokens[player]
-        this.hasWon(player)
-        return this.board
+        for(let i = 5; i >= 0; i--) {
+            if(this.board[i][columnNumber - 1] === ' ') {
+                this.board[i][columnNumber - 1] = this.tokens[player]
+                break;
+            }
+        }
     }
 
-    hasWon(player) {
-      let counter = 1
-      for(let i = 0; i < 5; i++) {
-        if(this.board[5][i] === this.tokens[player] && this.board[5][i] === this.board[5][i + 1]) {
-          counter += 1;
-        } else {
-          counter = 1;
-        }
+    _hasWon(player) {
+      this._hasWonHorizontally(player)
+      this._hasWonVertically(player)
+    }
 
-        if(counter === 4) {
-          this.inProgress = false
-          return `Player ${player} has won!`
+    _hasWonHorizontally(player) {
+        for(let a = 5; a >= 0; a--) {
+            for(let i = 0; i < 5; i++) {
+                this._placeTokens(a, i, player)
+            }
         }
-      }
-  }
+    }
+
+    _hasWonVertically(player) {
+        for(let a = 0; a < 5; a++) {
+            for(let i = 5; i >= 0; i--) {
+                this._placeTokens(i, a, player)
+            }
+        }
+    }
+
+    _placeTokens(a, i, player) {
+        this.board[a][i] === this.tokens[player] ?
+            this.counter += 1 : this.counter = 0
+        this._winConditions(player)
+    }
+
+    _winConditions(player) {
+        if(this.counter === 4) {
+            this.inProgress = false
+            this.winner = player
+        }
+    }
 }
 
-module.exports = ConnectFour;
+
+module.exports = ConnectFour

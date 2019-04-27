@@ -33,9 +33,9 @@ while (app.inProgress) {
     clearScreen();
     try {
         app.selectColumn(input, player);
+        app._hasWon(player)
         playerOne = !playerOne;
     } catch (e) {
         console.error('\x1b[31m' ,`*** ${e}... Please try again. ***`, '\x1b[0m')
     }
 }
-
