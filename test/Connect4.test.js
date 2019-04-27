@@ -79,7 +79,7 @@ describe('Connect4', () => {
             describe('horizontal wins', () => {
 
                 test('player 1 can win with 4 in a row horozintally', () => {
-                    const connect4 = new Connect4();
+                    const connect4 = new Connect4()
 
                     expect(connect4.inProgress).toEqual(true)
 
@@ -98,7 +98,7 @@ describe('Connect4', () => {
                 })
 
                 test('player 1 can win with 4 in a row horozintally with gaps', () => {
-                    const connect4 = new Connect4();
+                    const connect4 = new Connect4()
 
                     connect4.board = ([
                         [' ', ' ', ' ', ' ', ' ', ' '],
@@ -115,7 +115,7 @@ describe('Connect4', () => {
                 })
 
                 test('player 2 can win with 4 in a row horozintally with gaps', () => {
-                    const connect4 = new Connect4();
+                    const connect4 = new Connect4()
 
                     connect4.board = ([
                         [' ', ' ', ' ', ' ', ' ', ' '],
@@ -132,7 +132,7 @@ describe('Connect4', () => {
                 })
 
                 test('either player can win with 4 in a row horozintally with gaps', () => {
-                    const connect4 = new Connect4();
+                    const connect4 = new Connect4()
 
                     connect4.board = ([
                         [' ', ' ', ' ', ' ', ' ', ' '],
@@ -152,7 +152,7 @@ describe('Connect4', () => {
             describe('vertical wins', () => {
 
             test('either player can win vertically', () => {
-                const connect4 = new Connect4();
+                const connect4 = new Connect4()
 
                 connect4.board = ([
                     [' ', ' ', ' ', ' ', ' ', ' '],
@@ -169,7 +169,7 @@ describe('Connect4', () => {
             })
 
             test('either player can win vertically with gaps', () => {
-                const connect4 = new Connect4();
+                const connect4 = new Connect4()
 
                 connect4.board = ([
                     [' ', ' ', ' ', ' ', ' ', ' '],
@@ -186,18 +186,18 @@ describe('Connect4', () => {
             })
         })
 
-        describe('ascending diagonal wins', () => {
+        describe('either player ascending diagonal wins', () => {
 
-            test('either player can win ascending diagonally', () => {
-                const connect4 = new Connect4();
+            test('win ascending diagonally low left', () => {
+                const connect4 = new Connect4()
 
                 connect4.board = ([
                     [' ', ' ', ' ', ' ', ' ', ' '],
                     [' ', ' ', ' ', ' ', ' ', ' '],
                     [' ', ' ', ' ', 'x', ' ', ' '],
-                    [' ', ' ', 'x', 'o', ' ', ' '],
-                    [' ', 'x', 'o', 'o', ' ', ' '],
-                    ['x', 'o', 'o', 'o', ' ', ' ']
+                    [' ', ' ', 'x', ' ', ' ', ' '],
+                    [' ', 'x', ' ', ' ', ' ', ' '],
+                    ['x', ' ', ' ', ' ', ' ', ' ']
                 ])
                 connect4._hasWon(1)
 
@@ -205,16 +205,16 @@ describe('Connect4', () => {
                 expect(connect4.winner).toEqual(1)
             })
 
-            test('either player can win ascending diagonally at top right', () => {
+            test('win ascending diagonally at top left', () => {
                 const connect4 = new Connect4()
 
                 connect4.board = ([
                     [' ', ' ', ' ', 'x', ' ', ' '],
-                    [' ', ' ', 'x', 'o', ' ', ' '],
-                    [' ', 'x', 'x', 'x', ' ', ' '],
-                    ['x', 'x', 'o', 'o', ' ', ' '],
-                    ['x', 'x', 'o', 'o', ' ', ' '],
-                    ['x', 'o', 'o', 'o', ' ', ' ']
+                    [' ', ' ', 'x', ' ', ' ', ' '],
+                    [' ', 'x', ' ', ' ', ' ', ' '],
+                    ['x', ' ', ' ', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' ']
                 ])
                 connect4._hasWon(1)
 
@@ -222,16 +222,16 @@ describe('Connect4', () => {
                 expect(connect4.winner).toEqual(1)
             })
 
-            test('either player can win ascending diagonally not from board[5][0]', () => {
-                const connect4 = new Connect4();
+            test('win ascending diagonally top right', () => {
+                const connect4 = new Connect4()
 
                 connect4.board = ([
                     [' ', ' ', ' ', ' ', ' ', 'x'],
-                    [' ', ' ', ' ', ' ', 'x', 'o'],
-                    [' ', ' ', ' ', 'x', 'x', 'x'],
-                    [' ', ' ', 'x', 'x', 'o', 'o'],
-                    [' ', ' ', 'x', 'x', 'o', 'o'],
-                    [' ', ' ', 'x', 'o', 'o', 'o']
+                    [' ', ' ', ' ', ' ', 'x', ' '],
+                    [' ', ' ', ' ', 'x', ' ', ' '],
+                    [' ', ' ', 'x', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' ']
                 ])
                 connect4._hasWon(1)
 
@@ -239,17 +239,42 @@ describe('Connect4', () => {
                 expect(connect4.winner).toEqual(1)
             })
 
-            xtest('either player can win ascending diagonally from mid table', () => {
-                const connect4 = new Connect4();
+            test('either player can win ascending diagonally from mid table', () => {
+                const connect4 = new Connect4()
+
+                connect4.board = ([
+                    [' ', ' ', ' ', ' ', 'x', ' '],
+                    [' ', ' ', ' ', 'x', ' ', ' '],
+                    [' ', ' ', 'x', ' ', ' ', ' '],
+                    [' ', 'x', ' ', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' ']
+                ])
+                connect4._hasWon(1)
+
+                expect(connect4.inProgress).toEqual(false)
+                expect(connect4.winner).toEqual(1)
+            })
+
+            test('win ascending diagonally from mid right', () => {
+                const connect4 = new Connect4()
 
                 connect4.board = ([
                     [' ', ' ', ' ', ' ', ' ', ' '],
                     [' ', ' ', ' ', ' ', ' ', 'x'],
-                    [' ', ' ', ' ', ' ', 'x', 'x'],
-                    [' ', ' ', ' ', 'x', 'o', 'o'],
-                    [' ', ' ', 'x', 'x', 'o', 'o'],
-                    [' ', ' ', 'x', 'o', 'o', 'o']
+                    [' ', ' ', ' ', ' ', 'x', ' '],
+                    [' ', ' ', ' ', 'x', ' ', ' '],
+                    [' ', ' ', 'x', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' ']
                 ])
+                // connect4.board = ([
+                //     [' ', ' ', ' ', ' ', ' ', ' '],
+                //     [' ', ' ', ' ', ' ', ' ', ' '],
+                //     [' ', ' ', ' ', ' ', ' ', 'x'],
+                //     [' ', ' ', ' ', ' ', 'x', ' '],
+                //     [' ', ' ', ' ', 'x', ' ', ' '],
+                //     [' ', ' ', 'x', ' ', ' ', ' ']
+                // ])
                 connect4._hasWon(1)
 
                 expect(connect4.inProgress).toEqual(false)
