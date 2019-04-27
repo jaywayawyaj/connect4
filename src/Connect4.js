@@ -60,8 +60,8 @@ class ConnectFour {
         }
     }
 
-    _countTokens(c, r, player) {
-        this.board[c][r] === this.tokens[player] ?
+    _countTokens(r, c, player) {
+        this.board[r][c] === this.tokens[player] ?
             this.counter += 1 : this.counter = 0
         this._winConditions(player)
     }

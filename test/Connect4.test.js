@@ -241,7 +241,7 @@ describe('Connect4', () => {
 
       expect(connect4.winner).toEqual(1)
   });
-  test('either player can win ascending diagonally not from board[5][0]', () => {
+  test('either player can win ascending diagonally at top right', () => {
       const connect4 = new Connect4();
       connect4.selectColumn(1, 1);
       connect4.selectColumn(1, 1);
