@@ -238,7 +238,43 @@ describe('Connect4', () => {
         ]);
 
       expect(connect4.inProgress).toEqual(false);
-      
+
+      expect(connect4.winner).toEqual(1)
+  });
+  test('either player can win ascending diagonally not from board[5][0]', () => {
+      const connect4 = new Connect4();
+      connect4.selectColumn(1, 1);
+      connect4.selectColumn(1, 1);
+      connect4.selectColumn(1, 1);
+      connect4.selectColumn(2, 2);
+      connect4.selectColumn(2, 1);
+      connect4.selectColumn(2, 1);
+      connect4.selectColumn(2, 1);
+      connect4.selectColumn(3, 2);
+      connect4.selectColumn(3, 2);
+      connect4.selectColumn(3, 2);
+      connect4.selectColumn(3, 1);
+      connect4.selectColumn(3, 1);
+      connect4.selectColumn(4, 2);
+      connect4.selectColumn(4, 2);
+      connect4.selectColumn(4, 2);
+      connect4.selectColumn(4, 1);
+      connect4.selectColumn(4, 2);
+      connect4.selectColumn(4, 1);
+      connect4._hasWon(1);
+
+
+      expect(connect4.board).toEqual([
+          [' ', ' ', ' ', 'x', ' ', ' '],
+          [' ', ' ', 'x', 'o', ' ', ' '],
+          [' ', 'x', 'x', 'x', ' ', ' '],
+          ['x', 'x', 'o', 'o', ' ', ' '],
+          ['x', 'x', 'o', 'o', ' ', ' '],
+          ['x', 'o', 'o', 'o', ' ', ' ']
+        ]);
+
+      expect(connect4.inProgress).toEqual(false);
+
       expect(connect4.winner).toEqual(1)
   });
 });
