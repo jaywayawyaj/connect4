@@ -77,6 +77,14 @@ class ConnectFour {
                 r >= 5 ? r = e : r++
             }
         }
+
+        for(let e = 0; e <= 5; e++) {
+            let c = e
+              for(let r = 0; r <= 5; r++) {
+                this._countTokens(r, c, player)
+                c >= 5 ? c = e : c++
+            }
+        }
     }
 
     _countTokens(r, c, player) {
