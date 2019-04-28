@@ -74,7 +74,7 @@ describe('Connect4', () => {
             })
         })
 
-        describe('winning situations', () => {
+        describe('end of game situations', () => {
 
             describe('horizontal wins', () => {
 
@@ -359,6 +359,24 @@ describe('Connect4', () => {
 
                 expect(connect4.inProgress).toEqual(false)
                 expect(connect4.winner).toEqual(1)
+            })
+        })
+
+        describe('drawing', () => {
+            test('if the board is full the game ends', () => {
+                const connect4 = new Connect4()
+
+                connect4.board = ([
+                    ['x', 'o', 'x', 'o', 'x', 'o'],
+                    ['x', 'o', 'x', 'o', 'x', 'o'],
+                    ['o', 'x', 'o', 'x', 'o', 'x'],
+                    ['o', 'x', 'o', 'x', 'o', 'x'],
+                    ['x', 'o', 'x', 'o', 'x', 'o'],
+                    ['x', 'o', 'x', 'o', 'x', 'o']
+                ])
+                connect4._isADraw()
+
+                expect(connect4.inProgress).toEqual(false)
             })
         })
     })
