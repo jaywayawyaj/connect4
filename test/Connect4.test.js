@@ -373,5 +373,19 @@ describe('Connect4', () => {
             const connect4 = new Connect4()
             expect(() => {connect4.selectColumn(7, 1)}).toThrowError('No such column')
         })
+
+        test('throws an error if column is full', () => {
+            const connect4 = new Connect4()
+
+            connect4.board = ([
+                ['x', ' ', ' ', ' ', ' ', ' '],
+                ['x', ' ', ' ', ' ', ' ', ' '],
+                ['x', 'x', ' ', ' ', ' ', ' '],
+                ['x', ' ', 'x', ' ', ' ', ' '],
+                ['x', ' ', ' ', 'x', ' ', ' '],
+                ['x', ' ', ' ', ' ', 'x', ' ']
+            ])
+            expect(() => {connect4.selectColumn(1, 1)}).toThrowError('Column full')
+        })
     })
 })
