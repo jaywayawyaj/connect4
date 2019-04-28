@@ -38,4 +38,9 @@ while (app.inProgress) {
     } catch (e) {
         console.error('\x1b[31m' ,`*** ${e}... Please try again. ***`, '\x1b[0m')
     }
+    if(!app.inProgress && app.winner === 0) {
+        console.log('\x1b[31m' ,`It's a draw!`, '\x1b[0m')
+    } else if(!app.inProgress && app.winner !== 0){
+        console.log('\x1b[31m' ,`Player ${app.winner} wins`, '\x1b[0m')
+    }
 }
