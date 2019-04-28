@@ -362,4 +362,16 @@ describe('Connect4', () => {
             })
         })
     })
+
+    describe('error handling', () => {
+        test('throws an error if column is 0', () => {
+            const connect4 = new Connect4()
+            expect(() => {connect4.selectColumn(0, 1)}).toThrowError('No such column')
+        })
+
+        test('throws an error if column is > 6', () => {
+            const connect4 = new Connect4()
+            expect(() => {connect4.selectColumn(7, 1)}).toThrowError('No such column')
+        })
+    })
 })
