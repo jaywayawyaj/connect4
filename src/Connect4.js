@@ -1,7 +1,7 @@
 class ConnectFour {
     constructor() {
-        this.inProgress = true;
-        this.winner = null;
+        this.inProgress = true
+        this.winner = 0
         this.board = [
             [' ', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' '],
@@ -20,19 +20,34 @@ class ConnectFour {
     }
 
     selectColumn(columnNumber, player) {
+        if(columnNumber > this.board[0].length || columnNumber < 1 ) throw 'No such column'
+        if(this.board[0][columnNumber-1] !== ' ') throw 'Column full'
+        this._placeToken(columnNumber, player)
+    }
+
+    _placeToken(columnNumber, player) {
         for(let i = 5; i >= 0; i--) {
             if(this.board[i][columnNumber - 1] === ' ') {
                 this.board[i][columnNumber - 1] = this.tokens[player]
-                break;
+            break;
             }
         }
     }
 
     _hasWon(player) {
-      this._hasWonHorizontally(player)
+      this._isADraw()
       this._hasWonVertically(player)
+      this._hasWonHorizontally(player)
       this._hasWonDiagonallyAscending(player)
       this._hasWonDiagonallyDescending(player)
+    }
+
+    _isADraw() {
+      let drawCounter = 0
+      this.board[0].forEach((space) => {
+        drawCounter += (space !== ' ' ? 1 : 0)
+      })
+      if(drawCounter === 6) this.inProgress = false
     }
 
     _hasWonHorizontally(player) {
@@ -56,7 +71,7 @@ class ConnectFour {
             let r = e
             for(let c = 0; c <= 5; c++) {
                 this._countTokens(r, c, player)
-                r <= 0 ? r = e : r--
+                r <= 0 ? r = 5 : r--
             }
         }
 
@@ -64,7 +79,7 @@ class ConnectFour {
             let c = e
             for(let r = 5; r >= 0; r--) {
                 this._countTokens(r, c, player)
-                c <= 0 ? c = e : c++
+                c <= 0 ? c = 0 : c++
             }
         }
     }
@@ -74,7 +89,7 @@ class ConnectFour {
             let r = e
             for(let c = 0; c <= 5; c++) {
                 this._countTokens(r, c, player)
-                r >= 5 ? r = e : r++
+                r >= 5 ? r = 0 : r++
             }
         }
 
@@ -82,7 +97,7 @@ class ConnectFour {
             let c = e
               for(let r = 0; r <= 5; r++) {
                 this._countTokens(r, c, player)
-                c >= 5 ? c = e : c++
+                c >= 5 ? c = 0 : c++
             }
         }
     }
